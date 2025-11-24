@@ -1,22 +1,5 @@
-try:
-    # 嘗試匯入 pptx。如果失敗，則執行安裝。
-    import pptx
-except ImportError:
-    st.warning("Force installing 'python-pptx' package due to environment error. Please wait...")
-    try:
-        # 強制使用 pip 執行安裝指令
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "python-pptx"])
-        import pptx # 再次嘗試匯入
-        st.success("Installation successful! Restarting the application...")
-        # 由於套件被動態安裝，最好的做法是強制 Streamlit 重新載入
-        st.experimental_rerun() 
-    except Exception as e:
-        st.error(f"FATAL ERROR during force installation: {e}")
-        st.stop()
-# ------------------------------------------------------------------
-
-# 現在 pptx 已經確定安裝或存在，可以安全地匯入後續的模組
-import backend_logic as bl  # 這裡不再會報錯
+import streamlit as st
+import backend_logic as bl 
 import json
 import zipfile
 import io
@@ -278,3 +261,4 @@ with tab3:
                 mime="application/zip"
 
             )
+
